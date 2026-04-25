@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honeyfeed Replica 23.04.26</title>
+            <!-- also 24.04.26 -->
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            color: #c4c4c4;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            min-width: fit-content;
+        }
+        .HeroSection{
+            display: flex;
+            justify-content: space-between;
+            background-color: rgba(28, 28, 28, 0.9);
+            gap: 40px;
+        }
+        .Left_portion{
+            height: 60px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 4vw;
+        }
+        .logo{
+            height: fit-content;
+            width: fit-content;
+            cursor: pointer;
+            margin-left: 1vw;
+        }
+        .logo img{
+            height: 60px;
+            filter: opacity(70%);
+            transition: ease-in-out 0.3s;
+        }
+        .logo img:hover{
+            filter: opacity(100%);
+        }
+        .options{
+            display: flex;
+            gap: 3vw;
+        }
+        .options ul{
+            margin: 2px;
+            list-style: none;
+            padding: 0px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        .options ul li{ 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .options ul li img{
+            height: 35px;
+            width: 35px;
+        }
+        .options ul:hover {
+            border-bottom: 3px solid rgb(246, 204, 76);
+            transition: ease-in-out 0.5s;
+        }
+        .Right_portion{
+            height: 60px;
+            display: flex;
+            align-items: center;
+            gap: 2vw;
+        }
+        .Searchbar input{
+            margin: 10px;
+            height: 32px;
+            width: 17vw;
+            padding: 15px;
+            border-radius: 80px;
+            outline: none;
+            border: 1px solid #c4c4c4;
+            background: transparent;
+            transition: ease-in-out 0.4s;
+        }
+        .Searchbar input:focus{
+            border: 1px solid rgb(246, 204, 76);
+        }
+        .notification img{
+           height: 30px;
+           width: 30px; 
+           cursor: pointer;
+           filter: opacity(70%);
+           transition: ease-in-out 0.3s;
+        }
+        .notification img:hover{
+            filter: opacity(100%);
+        }
+        .Login{
+            padding-right: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: ease-in-out 0.4s;
+        }
+        .Login:hover{
+            color: rgb(246, 204, 76);
+        }
+        .main_body{
+            background-color: rgba(55, 57, 62, 0.9985);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+        .front_image{            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .front_image img{
+            border-radius: 38%;
+            width: 150px;
+            filter: opacity(60%);
+            transition: ease-in-out 0.3s;
+        }
+        .front_image img:hover{
+            filter: opacity(80%);
+        }
+        .front_image p{
+            margin: 5px;
+            font-size: 30px;
+            text-align: center;
+            transition: ease-in-out 0.3s;
+        }
+        .front_image p:hover{
+            filter: opacity(100%) drop-shadow(15px 15px 0px rgba(246, 204, 76, 0.7));
+        }
+        .News{
+            display: flex;
+            flex-direction: column;
+        }
+        .news_heading{
+            padding-top: 10px;
+            display: flex;
+            width: fit-content;
+            align-items: center;
+            border-bottom: 2px solid transparent;
+            transition: ease-in-out 0.6s;
+        }
+        .news_heading img{
+           height: 30px;
+           width: 30px;
+        }
+        .news_heading p{
+            font-size: 22px;
+            margin: 3px;
+        }
+        .news_heading:hover{
+            border-bottom: 2px solid rgb(246, 204, 76);
+        }
+        .Announcements{
+            border-collapse: collapse;
+        }
+        .Announcements td{
+            border-collapse: collapse;
+            border-bottom: 1px solid #c4c4c4;
+            padding: 10px;
+        }
+        .announcing{
+            width: 30vw;
+        }
+        .read_button{
+            width: fit-content;
+            align-content: end;
+
+        }
+        .read_button button{
+            font-size: small;
+            border-radius: 3px;
+            border: none;
+            color: black;
+            background-color: rgb(246, 204, 76);
+            text-align: center;
+            transition: ease-in-out 0.3s;
+            cursor: pointer;
+        }
+        .read_button button:hover{
+            background-color: rgba(246, 204, 76, 0.7);
+        }
+        .read_text{
+            margin: 15px;
+            transition: ease-in-out 0.4s;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+        .read_text:hover{
+            color: rgb(246, 204, 76);
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+        }
+        .contents{
+            background-color: rgba(28, 28, 28, 0.9);
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+        }
+        /* .slider{
+            display: flex;
+            height: 390px;
+            width: 260px;
+            overflow-x: auto;
+            flex-shrink: 0;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+        .slides {
+            min-width: 100%;
+            height: 100%;
+            scroll-snap-align: center;
+        }
+        .slider::-webkit-scrollbar {
+            display: none;
+        }
+         .slides img{
+            height: 390px;
+            width: 260px;
+         } */
+        .contents a{
+            text-decoration: underline transparent;
+            color: #c4c4c4;
+            font-size: larger;
+            transition: ease-in-out 0.3s;
+        }
+        .contents a:hover{
+            text-decoration: underline;
+            color: rgb(246, 204, 76);
+        }
+        .DTTH{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .DTTH img{
+            border-radius: 10px;
+            width: 260px;
+            cursor: pointer;
+            transition: ease-in-out 0.2s;
+        }
+        .DTTH p{
+            margin-bottom: 0px;
+        }
+        .details{
+            display: flex;
+            flex-direction: column;
+            align-items: center;            
+            max-width: 30vw;
+        }
+        .Synopsis{
+            padding-top: 10px;
+            display: flex;
+            width: fit-content;
+            align-items: center;
+            border-bottom: 2px solid rgb(246, 204, 76);
+            transition: ease-in-out 0.6s;
+        }
+        .Synopsis img{
+           height: 50px;
+           width: 50px;
+           mix-blend-mode: lighten;
+        }
+        .Synopsis p{
+            font-size: 25px;
+            margin: 3px;            
+        }
+        .summary{
+            margin: 15px;
+            align-self: center;
+            text-align:justify;
+        }
+    </style>
+</head>
+<body>
+    <header class="HeroSection">        
+          <div class="Left_portion">  
+            <div class="logo"><a href="https://www.honeyfeed.fm/">
+                <img src="https://64.media.tumblr.com/46cb70400289c99b34b5756192c3bf79/4ce97ac6eba90224-55/s400x600/69379af39a06b7631dc06ac400795cd66f4c9c88.pnj" alt="Honeyfeed">
+            </a></div>
+            <div class="options">
+                <ul onclick="Not_Added()">
+                    <li>
+                        <img src="https://www.mhcautomation.com/wp-content/uploads/2021/05/eSignatures.png" alt="Create">
+                    </li>
+                    <li style="color: #c4c4c4">
+                        <b>Create</b>
+                    </li>
+                </ul>
+                <ul onclick="Not_Added()">
+                    <li>
+                        <img src="https://cdn-icons-png.flaticon.com/512/8688/8688248.png" alt="Novel">
+                    </li>
+                    <li style="color: #c4c4c4">
+                        <b>Novels</b>
+                    </li>
+                </ul>
+                <ul onclick="Not_Added()">
+                    <li>
+                        <img src="https://cdn-icons-png.freepik.com/256/5973/5973617.png?semt=ais_white_label" alt="Genre">
+                    </li>
+                    <li style="color: #c4c4c4">
+                        <b>Genre</b>
+                    </li>
+                </ul>
+            </div>
+          </div>  
+          <div class="Right_portion">
+
+            <div class="Searchbar">
+                <input type="search" placeholder="Search">
+            </div>
+            <div class="notification" onclick="Notification()">
+                <img src="https://icones.pro/wp-content/uploads/2022/02/icone-de-cloche-grise.png" alt="Notifications">
+            </div>
+            <div class="Login" onclick="Not_Added()">
+                Sign in
+            </div>
+
+          </div>
+    </header>
+    <section>
+        <div class="main_body">
+            <div class="front_image">
+                <img src="https://i.ibb.co/5x9Y7vTk/c1b100df-70e7-43eb-9281-e872adacfe6d.png" alt="Big_Logo">
+                <p>Create. Share. Collaborate.</p>
+            </div>
+            <div class="News">
+             <div class="news_heading">
+                <img src="https://icones.pro/wp-content/uploads/2022/02/icone-de-cloche-grise.png" alt="Announcements">
+                <p>Updates</p>
+             </div>
+             <div class="news_table">
+                <table class="Announcements">
+                    <tr>
+                        <td class="announcing">Apr 24, 2026: Thought of replicating as much as I can, but could not with my limited knowledge. So decided to make a page for my own novels.</td>
+                        <td class="read_button"><button onclick="more()">> Read More</button></td>
+                    </tr>
+                    <tr>
+                        <td class="announcing">Apr 23, 2026: Began Replicating the Honeyfeed site with the tags and styling learnt till then.</td>
+                        <td class="read_button"><button onclick="more()">> Read More</button></td>
+                    </tr>
+                    <tr>
+                        <td class="announcing">Apr 17, 2026: Thought of learning Web Development and began learning with the help of my Friend.</td>
+                        <td class="read_button"><button onclick="more()">> Read More</button></td>
+                    </tr>
+                </table>
+             </div>
+             <div class="read_text" onclick="No_More_Updates()">View More</div>
+             </div>
+        </div>
+        <div class="content">
+            <div class="contents">
+            <a href="https://docs.google.com/document/d/1iCmM2aVGWgnu-xU5kG7U5yIFtERLr9Gvw6D5naGbSUA/edit?tab=t.g6xwozj8mpy3"><div class="DTTH">
+                <img src="https://i.ibb.co/23GXJwSL/Driven-To-The-Hell.png" alt="DTTH">
+                <p>Driven To The Hell</p>
+            </div></a>
+            <div class="details">
+             <div class="Synopsis">
+                <img src="https://static.thenounproject.com/png/4464299-200.png" alt="Synopsis">
+                <p>Synopsis</p>
+             </div>
+             <div class="summary">
+                Marlik Tuwed, the puppeteer who nearly doomed Earth, is dead. Or so the world believes. Reborn in another world as Basalin Lenard, a lion beast-kin, he remembers nothing of his dark past, but his presence remains inside. As shadows of destiny are stirring, the Demon Lord has risen, hellbent on annihilating elves, dwarves, humans, and beast-kin and this time, he actually succeeded. As the world stands on the brink of ruin, Basalin uncovers the truth about his past… and decides whether to embrace the monster he once was or become the hero the world desperately needs.
+             </div>
+            </div>
+            </div>
+            <div class="contents">
+            <a href="https://docs.google.com/document/d/1R9RmE0sOnMJwYELogjqUZnhHgqtsF3-Npi1LOpQF7O8/edit?tab=t.0"><div class="DTTH">
+                <img src="https://i.ibb.co/vxtvKvxf/cover-thumb-2fe9a4f9-cf84-4e1b-9837-d684f20488a7.png" alt="DTTH">
+                <p>Nichigetsu Kosen</p>
+            </div></a>
+            <div class="details">
+             <div class="Synopsis">
+                <img src="https://static.thenounproject.com/png/4464299-200.png" alt="Synopsis">
+                <p>Synopsis</p>
+             </div>
+             <div class="summary">
+                With the Sun and Moon being the main sources of flux, the whole world got divided between Solars and Lunars. Where Solar flux offers physical capabilities, Lunar flux specialises in mental abilities. But a third entity always haunted the Earth, forcing everything into destruction. Another source of flux—Black Holes. Though little, its tenebral flux has been mutating the living, all and forever, granting them powers to destroy.
+
+One day, Arata Tsukihara, a seventeen-year-old boy, gets confronted by such beings. The secrets that were kept hidden from the people finally surfaced before him, changing his entire view of the society. With nothing left to look back on, he intertwines himself further as he sets out on a journey led by a mysterious card.
+             </div>
+            </div>
+            </div>
+            <div class="contents">
+            <a href="https://docs.google.com/document/d/1Ab2fRgaOsZjlVeMbghUOITYd5uMtmNnCaXrtxIFggcg/edit?tab=t.mchr5jrpo0aq"><div class="DTTH">
+                <img src="https://i.ibb.co/Wp2hPhQX/cover-thumb-b70167e1-ff19-4516-8a4d-ff75417b29df.jpg" alt="DTTH">
+                <p>Our Final Rest</p>
+            </div></a>
+            <div class="details">
+             <div class="Synopsis">
+                <img src="https://static.thenounproject.com/png/4464299-200.png" alt="Synopsis">
+                <p>Synopsis</p>
+             </div>
+             <div class="summary">
+                Four centuries ago, the prodigy Ariellea Dros sealed herself away after her apocalyptic creations, the "Forbiddens", brought the world to the brink of annihilation. Now, she is awakened by Caelin Lenyar, a hardened young man cursed with a terrifying power that makes him a feared pariah.
+
+Caelin’s goal is absolute: gather the scattered Forbiddens and use their catastrophic might to tear the world apart. Bound to him by duty and an inescapable magical link, Ariellea becomes his reluctant guide. Alongside some fellow outcasts, they begin a grim hunt across the fractured world of Orvanys.
+             </div>
+            </div>
+            </div>
+        </div>
+        <!-- <div class="contents">
+            <div class="slider">
+                <div class="slides slide-1">
+                    <img src="./Images/Final.png" alt="Driven_To_The_Hell">
+                </div>
+                <div class="slides slide-2">                    
+                    <img src="./Images/Nichigetsu Kosen 2.png" alt="Nichigetsu_Kosen">
+                </div>
+                <div class="slides slide-3">                    
+                    <img src="./Images/download.jpeg" alt="Our_Final_Rest">
+                </div>
+            </div>
+        </div> -->
+    </section>
+    <script>
+        function Notification() {
+            alert("No notifications are left.")
+        }
+        function No_More_Updates() {
+            alert("No More Updates.")
+        }
+        function more() {
+            alert("That's all.")
+        }
+        function Not_Added() {
+            alert("This feature has not been added yet. Sorry for the inconvenience.")
+        }
+    </script> 
+</body>
+</html>
+<!--<img src="https://i.ibb.co/23GXJwSL/Driven-To-The-Hell.png" alt="Driven_To_The_Hell"> -->
+<!--<img src="https://i.ibb.co/vxtvKvxf/cover-thumb-2fe9a4f9-cf84-4e1b-9837-d684f20488a7.png" alt="Nichigetsu_Kosen"> -->
+<!--<img src="https://i.ibb.co/Wp2hPhQX/cover-thumb-b70167e1-ff19-4516-8a4d-ff75417b29df.jpg" alt="Our_Final_Rest"> -->
